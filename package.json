@@ -1,9 +1,7 @@
 {
   "scripts": {
     "start": "node index.js",
-    ...
-  }
-  ...
+  },
   "license": "ISC",
   "engines": {
     "node": "9.2.1"
