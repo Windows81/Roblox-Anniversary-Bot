@@ -4,6 +4,9 @@
   },
   "license": "ISC",
   "engines": {
-    "node": "9.2.1"
-  }
+    "node": "10.13.0"
+  },
+  "dependencies": {
+    "axios": "^0.16.2"
+  },
 }
