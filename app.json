@@ -1,6 +1,9 @@
 {
   "name": "",
   "description": "",
+  "engines": {
+    "node": "10.13.0"
+  },
   "dependencies": {
     "axios": "^0.16.2",
   },
