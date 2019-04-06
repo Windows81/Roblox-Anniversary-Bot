@@ -18,7 +18,7 @@ async function xxx(){
 		request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
 			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
 			var d=tw?new Date(tw[3]+'/'+tw[2]+'/'+tw[1]):null;
-			if(d)C=d;console.log(d);
+			if(tw)C=tw[0];console.log(d);
 		});
 	}
 }
