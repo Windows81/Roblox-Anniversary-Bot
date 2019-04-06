@@ -11,6 +11,8 @@ server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
 
-for(var c=1630228;c<1630230;c++){
-	await request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{console.log(b.length);})._rp_promise;
+async function iter88(){
+	for(var c=1630228;c<=1630230;c++){
+		await request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{console.log(b.length);})._rp_promise;
+	}
 }
