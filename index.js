@@ -26,6 +26,5 @@ async function xxx(){
 }
 xxx();
 */
-var w=fs.createWriteStream('./təst.666');
-w.write('Test.');
-w.end();
+var r=fs.createReadStream('./təst.666');
+console.log(r.read());
