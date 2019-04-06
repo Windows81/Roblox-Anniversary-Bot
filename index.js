@@ -11,6 +11,7 @@ server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
 
+request.cookie('X-CSRF-TOKEN=9BXiDQwpkzax');
 request({
 	method:'POST',
 	url:'https://presence.roblox.com/v1/presence/users',
