@@ -16,3 +16,4 @@ async function iter88(){
 		await request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{console.log(b.length);})._rp_promise;
 	}
 }
+iter88();
