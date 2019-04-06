@@ -27,10 +27,6 @@ async function xxx(){
 xxx();
 */
 
-var w=fs.createWriteStream('text.txt');
-w.write('TƏST.');
-w.end();
-
 var exec = require('child_process').exec;
 
 // any unix based command
