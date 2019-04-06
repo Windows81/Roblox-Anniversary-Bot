@@ -12,8 +12,6 @@ server.listen(PORT,()=>{
 });
 
 //request.cookie();
-request({
-	method:'POST',
-	url:'https://presence.roblox.com/v1/presence/users',
-	form:{'userIds[]':1630227}},
+request.get({
+	url:'https://www.roblox.com/users/1630228/profile',
 	function(e,r,body){console.log(r.statusCode);})
