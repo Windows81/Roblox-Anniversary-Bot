@@ -1,5 +1,5 @@
 const http=require('http');
-const request=require('request-promise-native');
+const request=require('request');
 const PORT=process.env.PORT || 5000;
 
 const server=http.createServer((req,res)=>{
@@ -13,10 +13,10 @@ server.listen(PORT,()=>{
 
 async function iter88(){
 	for(var c=1630228;c<=1630230;c++){
-		await request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
+		request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
 			var tw=/href="https:\/\/twitter.com\/(\w+)/.exec(b);
-			if(tw)console.log(tw[1]);
-		})._rp_promise;
+			if(tw)console.log(tw[1])else console.log(c);
+		});
 	}
 }
 iter88();
