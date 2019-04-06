@@ -12,5 +12,5 @@ server.listen(PORT,()=>{
 });
 
 for(var c=1630228;c<1630229;c++){
-	console.log(request.get(`https://www.roblox.com/users/${c}/profile`));
+	console.log(request.get(`https://www.roblox.com/users/${c}/profile`)._rp_promise);
 }
