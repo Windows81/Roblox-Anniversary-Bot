@@ -12,5 +12,4 @@ server.listen(PORT,()=>{
 });
 
 //request.cookie();
-request.get('https://www.roblox.com/users/1630228/profile',
-	function(e,r,body){console.log(r.statusCode);})
+request.get('https://www.roblox.com/users/1630228/profile').on('body',b=>{console.log('YAYAYAYAYYA!'+b.length);})
