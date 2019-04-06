@@ -26,10 +26,12 @@ function joinD8(id){
 	});
 }
 
-var id=1630228,d=1000;
+var id=1630228,d=1271;
 async function xxx(){
-	for(var c=id;c<=id+4;c+=d){
-		console.log(await joinD8(c));
+	for(var c=id;true;c+=d){
+		var d=await joinD8(c));
+		console.log(d);
+		if(d.getDay()==2)break;
 	}
 }
 xxx();
