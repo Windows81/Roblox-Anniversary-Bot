@@ -13,32 +13,22 @@ server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
 
-var id=1630228,d=1000;
-/*
-async function xxx(){
-	for(var c=id;c<=id;c++){
+function joinD8(id){
+	return new Promise((y,n)=>{
 		request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
 			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
+			if(!tw){n();return;};
+			
 			var d=tw?new Date(tw[3]+'/'+tw[1]+'/'+tw[2]):null;
-			if(tw)C=tw[0];console.log(d);
+			d.setFullYear(d.getFullYear()-10);
+			y(d);
 		});
-	}
+	});
+}
+
+var id=1630228,d=1000;
+async function xxx(){
+	for(var c=id;c==id;c+=d)
+		console.log(await joinD8(c));
 }
 xxx();
-*/
-
-var exec = require('child_process').exec;
-
-// any unix based command
-var cmdToLaunch = "ls -la";
-
-function execCB (error, stdout, stderr) {
-    if (error) {
-        console.error(`exec error: ${error}`);
-        return;
-    }
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
-}
-
-var app = exec(cmdToLaunch, execCB);
