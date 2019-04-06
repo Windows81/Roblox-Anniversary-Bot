@@ -12,9 +12,9 @@ server.listen(PORT,()=>{
 });
 
 async function iter88(){
-	for(var c=1630228;c<=1630230;c++){
+	for(var c=1630228;c<=1630228;c++){
 		request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
-			var tw=/href="https:\/\/twitter.com\/(\w+)/.exec(b);
+			var tw=/href="twitter.com\/(\w+) target=_blank/.exec(b);
 			if(tw)console.log(tw[1]);else console.log(c);
 		});
 	}
