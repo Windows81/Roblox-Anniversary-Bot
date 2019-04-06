@@ -12,7 +12,7 @@ server.listen(PORT,()=>{
 });
 
 async function iter88(){
-	for(var c=1630228;c<=1630330;c++){
+	for(var c=1630228;c<=1630230;c++){
 		await request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
 			var tw=/href="https:\/\/twitter.com\/(\w+)/.exec(b);
 			if(tw)console.log(tw[1]);
