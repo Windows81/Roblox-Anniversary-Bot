@@ -28,7 +28,7 @@ function joinD8(id){
 
 var id=1630228,d=1000;
 async function xxx(){
-	for(var c=id;c==id+4;c+=d){
+	for(var c=id;c<=id+4;c+=d){
 		console.log(await joinD8(c));
 	}
 }
