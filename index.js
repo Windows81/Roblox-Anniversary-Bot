@@ -16,7 +16,7 @@ var id=1630228,d=1000;
 async function xxx(){
 	for(var c=id;c<=id;c++){
 		request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
-			var tw=/Join Date<p class=text-lead>(\d+)\/(\d+)\/(\d{4})/.exec(b);
+			var tw=/>(\d+)\/(\d+)\/(\d{4})/.exec(b);
 			var d=tw?new Date(tw[3]+'/'+tw[2]+'/'+tw[1]):null;
 			if(d)C=d;console.log(d)
 		});
