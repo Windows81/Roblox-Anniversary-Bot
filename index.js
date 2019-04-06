@@ -11,5 +11,7 @@ server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
 
-for(var c=1630228;c<1630229;c++)
+for(var c=1630228;c<1630229;c++){
 	request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{console.log(b.length);})
+	console.log(c);
+}
