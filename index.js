@@ -11,5 +11,5 @@ server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
 
-//request.cookie();
-request.get('https://www.roblox.com/users/1630228/profile').on('body',b=>{console.log('YAYAYAYAYYA!'+b.length);})
+for(var c=1630228;true;c++)
+	request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{console.log('YAYAYAYAYYA!'+c+' '+b.length);})
