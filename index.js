@@ -17,10 +17,10 @@ function joinD8(id){
 	return new Promise((y,n)=>{
 		request.get(`https://www.roblox.com/users/${c}/profile`,(e,r,b)=>{
 			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
-			if(!tw){n();return;};
+			if(!tw){y(null);return;};
 			
 			var d=tw?new Date(tw[3]+'/'+tw[1]+'/'+tw[2]):null;
-			d.setFullYear(d.getFullYear()-10);
+			//d.setFullYear(d.getFullYear()-10);
 			y(d);
 		});
 	});
@@ -28,7 +28,8 @@ function joinD8(id){
 
 var id=1630228,d=1000;
 async function xxx(){
-	for(var c=id;c==id;c+=d)
+	for(var c=id;c==id;c+=d){
 		console.log(await joinD8(c));
+	}
 }
 xxx();
