@@ -14,5 +14,5 @@ server.listen(PORT,()=>{
 request({
 	method:'POST',
 	url:'https://presence.roblox.com/v1/presence/users',
-	form:{'userIds[]':1630227},
+	form:{'userIds[]':1630227}},
 	function(e,r,body){console.log(r.statusCode);})
