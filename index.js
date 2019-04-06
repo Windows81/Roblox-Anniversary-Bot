@@ -1,5 +1,4 @@
 const http=require('http');
-const request = require('axios');
 const PORT=process.env.PORT || 5000;
 
 const server=http.createServer((req,res)=>{
