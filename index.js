@@ -1,5 +1,5 @@
 const http=require('http');
-const request=require('request-promise-native');
+const request=require('request');
 const PORT=process.env.PORT || 5000;
 
 const server=http.createServer((req,res)=>{
