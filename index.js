@@ -38,8 +38,8 @@ async function xxx(){
 		console.log(jd,c);
 		var s=Math.sign(delta);
 		if(delta<0^jd==20081202)
-			if(delta==1){break;}
-			elseif(delta==-1){c++;break;}
+			if(delta==1)break;
+			else if(delta==-1&&c++)break;
 			else delta/=-2;
 	}
 }
