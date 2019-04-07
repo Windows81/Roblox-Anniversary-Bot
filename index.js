@@ -18,9 +18,9 @@ function joinD8(id){
 		request.get(`https://www.roblox.com/users/${id}/profile`,(e,r,b)=>{
 			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
 			if(!tw){fulfil(null);C=b;return;};
-			var y=parseInt(w[3]);
-			var m=parseInt(w[1]);
-			var d=parseInt(w[2]);
+			var y=parseInt(tw[3]);
+			var m=parseInt(tw[1]);
+			var d=parseInt(tw[2]);
 			
 			//29 February gets rounded up.
 			if(m==2&&d==29)m=3,d=1;
