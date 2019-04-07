@@ -2,6 +2,7 @@ const fs=require('fs');
 const http=require('http');
 const request=require('request');
 const PORT=process.env.PORT || 5000;
+const CronJob = require('cron').CronJob;
 
 var C='';
 const server=http.createServer((req,res)=>{
@@ -49,4 +50,8 @@ async function getFirstPlayerFromDate(base,dateInt){
 	}
 }
 
-getFirstPlayerFromDate(1630228,20090407).then(r=>{console.log(r)})
+new CronJob('00 00 00 * * *',()=>{
+	const d=new Date();
+	const n=d.getFullYear()+100*(1+d.getMonth())+d.getDate()
+	getFirstPlayerFromDate(1630228,20090407).then(r=>{console.log(r)})
+},null,true,'America/Chicago');
