@@ -10,7 +10,7 @@ var C='';
 const server=http.createServer((req,res)=>{
 	res.statusCode=200;
 	res.setHeader('Content-Type', 'text/plain');
-	res.end(request.get('https://www.roblox.com/users/1630228/profile'));
+	request.get('https://www.roblox.com/users/1630228/profile',(e,r,b)=>{res.end(b)});
 });
 server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
