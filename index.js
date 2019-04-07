@@ -14,25 +14,29 @@ server.listen(PORT,()=>{
 });
 
 function joinD8(id){
-	return new Promise((y,n)=>{
+	return new Promise(fulfil=>{
 		request.get(`https://www.roblox.com/users/${id}/profile`,(e,r,b)=>{
 			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
-			if(!tw){y(null);C=b;return;};
+			if(!tw){fulfil(null);C=b;return;};
+			var y=parseInt(w[3]);
+			var m=parseInt(w[1]);
+			var d=parseInt(w[2]);
 			
-			var d=tw?new Date(tw[3]+'/'+tw[1]+'/'+tw[2]):null;
-			d.setFullYear(d.getFullYear()+10);
-			y(d);
+			//29 February gets rounded up.
+			if(m==2&&d==29)m=3,d=1;
+			
+			//Returns a YMD-integer-thing.
+			y(10000*(tw[3]+10)+100*tw[1]+tw[2]));
 		});
 	});
 }
 
-var id=1630228,d=1271;
+var userid=1630228,delta=1271;
 async function xxx(){
-	for(var c=id;true;c+=d){
-		var d=await joinD8(c);
-		if(!d)break;
-		console.log(d);
-		if(d.getDate()==2)break;
+	for(var c=userid;true;c+=delta){
+		var jd=await joinD8(c);
+		console.log(jd,c);
+		if(jd==20081202)break;
 	}
 }
 xxx();
