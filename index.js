@@ -31,12 +31,17 @@ function joinD8(id){
 	});
 }
 
-var userid=1630228,delta=1271;
+var userid=1630228,delta=0x1000;
 async function xxx(){
 	for(var c=userid;true;c+=delta){
 		var jd=await joinD8(c);
 		console.log(jd,c);
-		if(jd==20081202)break;
+		var s=Math.sign(delta);
+		if(delta<0^jd==20081202){
+			if(Math.abs(delta)==1)
+				break;
+			delta/=-2;
+		}
 	}
 }
 xxx();
