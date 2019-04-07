@@ -31,7 +31,7 @@ function joinD8(id){
 	});
 }
 
-function getFirstPlayerFromDate(base,dateInt){
+async function getFirstPlayerFromDate(base,dateInt){
 	var delta=0x1000
 	for(var c=base;true;c+=delta){
 		var jd=await joinD8(c);
@@ -43,7 +43,4 @@ function getFirstPlayerFromDate(base,dateInt){
 	}
 }
 
-async function xxx(){
-	console.log(getFirstPlayerFromDate(1630228,20081130));
-}
-xxx();
+console.log(getFirstPlayerFromDate(1630228,20081130));
