@@ -43,30 +43,61 @@ const client=new Twitter({
 
 const cache={};
 function clearCache(){cache.length=0}
-async function getFirstPlayerFromDate(base,dateInt){
+async function getPlayerDateRange(base,dateInt){
 	var delta=0x1000,s=false;
+	var min=base,max=base;
 	for(var c=base;true;c+=delta){
 		
 		//Repeatedly searches for nearby IDs until a join date is found.
-		var jd;do jd=cache[c]?cache[c]:await joinD8(c);while(!jd&&c--);
+		var jd;do cache[c]=jd=cache[c]?cache[c]:await joinD8(c);while(!jd&&c--);
 		
-		cache[c]=jd;
+		//Stores the highest value found for the date.
+		if(jd==dateInt&&max<c)max=c;
+		
 		if(delta<0^jd>=dateInt)
 			if(c==base)delta*=-1;
-			else if(delta==1)return c;
-			else if(delta==-1)return c+1;
+			else if(delta==1){min=c;break;}
+			else if(delta==-1){min=c+1;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-		//console.log(c,jd);
+		console.log(jd,c,delta);
 	}
+	
+	//Now determine the max value in the range.
+	delta=0x1000;for(var c=max;true;c+=delta){
+		
+		//Repeatedly searches for nearby IDs until a join date is found.
+		var jd;do cache[c]=jd=cache[c]?cache[c]:await joinD8(c);while(!jd&&c--);
+		
+		if(delta<0^jd>dateInt)
+			if(c==base)delta*=-1;
+			else if(delta==1){max=c-1;break;}
+			else if(delta==-1){max=c;break;}
+			else{s=true;delta/=-2;}
+		else if(!s)delta*=2;
+		console.log(jd,c,delta);
+	}
+	
+	//Return the range.
+	return[min,max];
 }
 
-var base=1630228;
+//Converts the Date object into a (probably) more efficient integer.
+function getDateInt(d){return d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
+
+var base=process.env.baseUID;
+console.log(base);
 function xxx(){
 	const d=new Date();
-	const n=d.getFullYear()+100*(1+d.getMonth())+d.getDate()
-	getFirstPlayerFromDate(base,n).then(r=>{console.log(d,base=r)})
-	client.post('statuses/update',{status:'I am a Tweet Tweet BİRD!'});
+	const n=getDateInt(d);
+	console.log(n);
+	getPlayerDateRange(base,n).then(r=>{
+		console.log(d,r[0],r[1]);
+		base=process.env.baseUID=r[1];
+		var s=`If your user ID is between these two values:\n`+
+			`${r[0]} & ${r[1]}\nCongrats on your tenth anniversary on the Rōblox platform!`;
+		client.post('statuses/update',{status:s});
+	});
 }new CronJob('00 59 23 * * *',xxx,null,true,'America/Chicago');
 xxx();
 
