@@ -30,6 +30,7 @@ var id=1630228,d=1271;
 async function xxx(){
 	for(var c=id;true;c+=d){
 		var d=await joinD8(c);
+		if(!d)break;
 		console.log(d);
 		if(d.getDate()==2)break;
 	}
