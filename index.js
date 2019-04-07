@@ -32,8 +32,18 @@ function joinD8(id){
 	});
 }
 
+//Hack me if you can.
+const client=new Twitter({
+  consumer_key:'zY5y6SW3Bj5zcfUX2feiTJuxs',
+  consumer_secret:'0H4huTo7Is0DhsssO9LY2MeJPTVwNpFj1GKuaovzEEXrbtP5Mt',
+  access_token_key:'458038971-MIfqHPEw9nXq5hPlpoWWH52bXU5ksDGdQExKJV8y',
+  access_token_secret:'Teiibn2h9jENADHOQ176E0dpJVi1VnjpfmL41PACX9tYi'
+});
+
+const cache={};
+function clearCache(){cache.length=0}
 async function getFirstPlayerFromDate(base,dateInt){
-	var delta=0x1000,s=false,cache={};
+	var delta=0x1000,s=false;
 	for(var c=base;true;c+=delta){
 		
 		//Repeatedly searches for nearby IDs until a join date is found.
@@ -50,8 +60,13 @@ async function getFirstPlayerFromDate(base,dateInt){
 	}
 }
 
-new CronJob('00 59 23 * * *',()=>{
+var base=1630228;
+function xxx(){
 	const d=new Date();
 	const n=d.getFullYear()+100*(1+d.getMonth())+d.getDate()
-	getFirstPlayerFromDate(1630228,n).then(r=>{console.log(d,r)})
-},null,true,'America/Chicago');
+	getFirstPlayerFromDate(base,n).then(r=>{console.log(d,base=r)})
+	client.post('statuses/update',{status:'I am a Tweet Tweet BİRD!'});
+}new CronJob('00 59 23 * * *',xxx,null,true,'America/Chicago');
+xxx();
+
+setInterval(()=>{},1<<30);
