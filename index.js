@@ -50,7 +50,7 @@ async function getFirstPlayerFromDate(base,dateInt){
 	}
 }
 
-new CronJob('00 00 00 * * *',()=>{
+new CronJob('00 * * * * *',()=>{
 	const d=new Date();
 	const n=d.getFullYear()+100*(1+d.getMonth())+d.getDate()
 	getFirstPlayerFromDate(1630228,20090407).then(r=>{console.log(r)})
