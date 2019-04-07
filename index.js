@@ -83,7 +83,7 @@ async function getPlayerDateRange(base,dateInt){
 }
 
 //Converts the Date object into a (probably) more efficient integer.
-function getDateInt(d){return d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
+function getDateInt(d){return 10000*d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
 
 var base=process.env.baseUID;
 console.log(base);
