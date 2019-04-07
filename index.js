@@ -46,12 +46,12 @@ async function getFirstPlayerFromDate(base,dateInt){
 			else if(delta==-1)return c+1;
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-		console.log(c,jd);
+		//console.log(c,jd);
 	}
 }
 
-new CronJob('00 * * * * *',()=>{
+new CronJob('00 59 23 * * *',()=>{
 	const d=new Date();
 	const n=d.getFullYear()+100*(1+d.getMonth())+d.getDate()
-	getFirstPlayerFromDate(1630228,20090407).then(r=>{console.log(r)})
+	getFirstPlayerFromDate(1630228,n).then(r=>{console.log(d,r)})
 },null,true,'America/Chicago');
