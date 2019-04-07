@@ -17,7 +17,7 @@ function joinD8(id){
 	return new Promise((y,n)=>{
 		request.get(`https://www.roblox.com/users/${id}/profile`,(e,r,b)=>{
 			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
-			if(!tw){y(undefined);return;};
+			if(!tw){y(null);C=b;return;};
 			
 			var d=tw?new Date(tw[3]+'/'+tw[1]+'/'+tw[2]):null;
 			d.setFullYear(d.getFullYear()+10);
