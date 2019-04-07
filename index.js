@@ -20,7 +20,7 @@ function joinD8(id){
 			if(!tw){y(null);return;};
 			
 			var d=tw?new Date(tw[3]+'/'+tw[1]+'/'+tw[2]):null;
-			d.setFullYear(d.getFullYear()-10);
+			d.setFullYear(d.getFullYear()+10);
 			y(d);
 		});
 	});
@@ -31,7 +31,7 @@ async function xxx(){
 	for(var c=id;true;c+=d){
 		var d=await joinD8(c);
 		console.log(d);
-		if(d.getDay()==2)break;
+		if(d.getDate()==2)break;
 	}
 }
 xxx();
