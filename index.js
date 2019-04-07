@@ -35,13 +35,13 @@ async function getFirstPlayerFromDate(base,dateInt){
 	var delta=0x1000,switched=false;
 	for(var c=base;true;c+=delta){
 		var jd=await joinD8(c);
-		console.log(c,jd,delta<0^jd>=dateInt,delta);
 		if(delta<0^jd>=dateInt)
 			if(c==base)delta*=-1;
 			else if(delta==1)return c;
 			else if(delta==-1)return c+1;
 			else{switched=true;delta/=-2;}
 		else if(!switched)delta*=2;
+		console.log(c,jd,delta<0^jd>=dateInt,delta);
 	}
 }
 
