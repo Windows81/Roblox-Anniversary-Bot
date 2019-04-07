@@ -26,7 +26,7 @@ function joinD8(id){
 			if(m==2&&d==29)m=3,d=1;
 			
 			//Returns a YMD-integer-thing.
-			fulfil(10000*(y+10)+100*m+d);
+			fulfil(10000*y+100*m+d);
 		});
 	});
 }
