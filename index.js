@@ -43,4 +43,4 @@ async function getFirstPlayerFromDate(base,dateInt){
 	}
 }
 
-console.log(getFirstPlayerFromDate(1630228,20081130));
+getFirstPlayerFromDate(1630228,20081130).then(r=>{console.log(r)})
