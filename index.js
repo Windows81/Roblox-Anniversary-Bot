@@ -89,6 +89,7 @@ var base=process.env.baseUID;
 console.log(base);
 function xxx(){
 	const d=new Date();
+	d.setFullYear(d.getFullYear()-10);
 	const n=getDateInt(d);
 	console.log(n);
 	getPlayerDateRange(base,n).then(r=>{
