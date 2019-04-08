@@ -130,9 +130,9 @@ var base=parseInt(process.env.baseUID);
 async function xxx(){
 	const d=new Date();
 	d.setFullYear(d.getFullYear()-10);
-	var twA=await getTwitters(n);
 	const n=getDateInt(d);
 	
+	var twA=await getTwitters(n);
 	getPlayerDateRange(base,n).then(r=>{
 		console.log(d,r[0],r[1],twA.length);
 		base=process.env.baseUID=r[1];
