@@ -147,4 +147,5 @@ async function xxx(){
 }new CronJob('0 0 * * *',xxx);
 xxx();
 
-setInterval(()=>{},1<<16);
+//Pings the server itself every so often in order to keep it running.
+setInterval(()=>{request.get('https://tenth-anniversaries.herokuapp.com/')},1<<16);
