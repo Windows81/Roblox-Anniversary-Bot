@@ -5,24 +5,53 @@ const Twitter=require('twitter');
 const PORT=process.env.PORT||5000;
 const CronJob=require('cron').CronJob;
 
+/*
 var C='';
 const server=http.createServer((req,res)=>{
 	res.statusCode=200;
 	res.setHeader('Content-Type', 'text/plain');
-	request.get({url:'https://www.roblox.com/users/1630228/profile',headers:{Cookie:".ROBLOSECURITY=_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_A70C0E6C5770B3F32B976EB7DD3CECFE4906EC1DABCCDD350CCA843EBB2D9EB4D073E3FEBBFF3AAF3292288C64E1895A660183B64A620B2C7E42F65E0DBB648C00FCD5643DC4FA4C642F5EBFE126D20349361305D8D1C9DAF560309483B543B6F650CA4359CA4EFEF8DD34B0C2413985DE3916D6C5783355A94D8C4EC94491EF4125AEB2ACADE83CD1F67706E03C2C6F915A64C319E05C52CCF82D7DB84224E63A16CD0C9FB1A2BF52192872BCA85662E4FECAD4763756E8F75317E5E1A34BB7F1C88F7EBB4757B6E78EAFA5DD912E840CFFFCECBC5B8D15E38E8D0DF7847F9D578D94DFFA187A2C9DF1509D6E2C4C632BE9630302B384A64F7E7316370EA948FF01802682879210A29D63666E78CF9CAB018E1A48DC1397D19F29F7ED73EC51A50C30B615CEA04A83540F76C433B3E4A1A0F92AA81F10B7A90E8CF82A54D30F60CD1AC0"}},(e,r,b)=>{res.end(b)});
+	res.end(C);
 });
 server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
+*/
+
+//Hack me if you can.
+const client=new Twitter({
+  consumer_key:'zY5y6SW3Bj5zcfUX2feiTJuxs',
+  consumer_secret:'0H4huTo7Is0DhsssO9LY2MeJPTVwNpFj1GKuaovzEEXrbtP5Mt',
+  access_token_key:'458038971-MIfqHPEw9nXq5hPlpoWWH52bXU5ksDGdQExKJV8y',
+  access_token_secret:'Teiibn2h9jENADHOQ176E0dpJVi1VnjpfmL41PACX9tYi'
+});}
+
+//Converts the Date object into an integer and vice-versa.
+function getDateInt(d){return 10000*d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
+function getDateStr(d){return~~(d/100%100)+'/'+d%100+'/'+~~(d/10000);}
+
+function getTwitter(id){
+	var t={url:`https://www.roblox.com/users/${id}/profile`,
+		headers:{Cookie:'.ROBLOSECURITY='+process.env.roblosecurity}};
+	return new Promise(fulfil=>{
+		request.get(t,(e,r,b)=>{
+			var mt=/=https:\/\/twitter\.com\/([^ ]+)/.exec(b);
+			fulfil(mt?mt[1]:null);
+		});
+	});
+}
+			    
+function getSalientUsers(d){
+	d=getDateStr(d);
+}
 
 function joinD8(id){
 	return new Promise(fulfil=>{
 		request.get(`https://www.roblox.com/users/${id}/profile`,(e,r,b)=>{
-			var tw=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
-			if(!tw){fulfil(null);C=b;return;};
-			var y=parseInt(tw[3]);
-			var m=parseInt(tw[1]);
-			var d=parseInt(tw[2]);
+			var mt=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
+			if(!mt){fulfil(null);return;}
+			var y=parseInt(mt[3]);
+			var m=parseInt(mt[1]);
+			var d=parseInt(mt[2]);
 			
 			//29 February gets rounded up.
 			if(m==2&&d==29)m=3,d=1;
@@ -32,15 +61,6 @@ function joinD8(id){
 		});
 	});
 }
-
-/*
-//Hack me if you can.
-const client=new Twitter({
-  consumer_key:'zY5y6SW3Bj5zcfUX2feiTJuxs',
-  consumer_secret:'0H4huTo7Is0DhsssO9LY2MeJPTVwNpFj1GKuaovzEEXrbtP5Mt',
-  access_token_key:'458038971-MIfqHPEw9nXq5hPlpoWWH52bXU5ksDGdQExKJV8y',
-  access_token_secret:'Teiibn2h9jENADHOQ176E0dpJVi1VnjpfmL41PACX9tYi'
-});
 
 const cache={};
 function clearCache(){cache.length=0}
@@ -83,9 +103,6 @@ async function getPlayerDateRange(base,dateInt){
 	return[min,max];
 }
 
-//Converts the Date object into a (probably) more efficient integer.
-function getDateInt(d){return 10000*d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
-
 var base=parseInt(process.env.baseUID);
 console.log(base);
 function xxx(){
@@ -104,4 +121,3 @@ function xxx(){
 xxx();
 
 setInterval(()=>{},1<<30);
-*/
