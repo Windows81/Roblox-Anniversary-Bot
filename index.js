@@ -116,7 +116,7 @@ function xxx(){
 		base=process.env.baseUID=r[1];
 		var s=`If your user ID is between these two values:\n\n`+
 			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
-		client.post('statuses/update',{status:s});
+		client.post('statuses/update',{status:s}).error((e)=>{console.warn(e)});
 	});
 }new CronJob('00 59 23 * * *',xxx);
 xxx();
