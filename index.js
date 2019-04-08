@@ -55,9 +55,8 @@ function getTwitter(id){
 		if(twCache[id]!=null)rs(twCache[id]?twCache[id]:null);
 		else request.get(t,(e,r,b)=>{
 			var mt=/=https:\/\/twitter\.com\/([^ ]+)/.exec(b);
-			console.log(id,mt?mt[1]:null);
 			twCache[id]=mt?mt[1]:0;
-			rs(mt?mt[1]:null);
+			rs(mt?'@'+mt[1]:null);
 		});
 	});
 }
@@ -131,19 +130,20 @@ var base=parseInt(process.env.baseUID);
 async function xxx(){
 	const d=new Date();
 	d.setFullYear(d.getFullYear()-10);
+	var twA=await getTwitters(n);
 	const n=getDateInt(d);
-	var twA=getTwitters(n);
-	//twA.forEach(s=>{console.log(s)});
 	
-	/*
 	getPlayerDateRange(base,n).then(r=>{
-		console.log(d,r[0],r[1]);
+		console.log(d,r[0],r[1],twA.length);
 		base=process.env.baseUID=r[1];
 		var s=`If your user ID is between these two values:\n\n`+
 			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
+		if(twA.length>0){
+			var comb=s+'\n\nHonourable Mentions: '+twA.join(', ');
+			s=comb;
+		}
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
-	*/
 }new CronJob('0 0 * * *',xxx);
 xxx();
 
