@@ -4,6 +4,7 @@ const request=require('request');
 const Twitter=require('twitter');
 const PORT=process.env.PORT||5000;
 const CronJob=require('cron').CronJob;
+process.env.TZ='America/Chicago'
 
 /*
 var C='';
@@ -117,7 +118,7 @@ function xxx(){
 			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
 		client.post('statuses/update',{status:s});
 	});
-}new CronJob('00 59 23 * * *',xxx,null,true,'America/Chicago');
+}new CronJob('00 59 23 * * *',xxx);
 xxx();
 
 setInterval(()=>{},1<<30);
