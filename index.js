@@ -113,8 +113,8 @@ function xxx(){
 	getPlayerDateRange(base,n).then(r=>{
 		console.log(d,r[0],r[1]);
 		base=process.env.baseUID=r[1];
-		var s=`If your user ID is between these two values:\n`+
-			`${r[0]} & ${r[1]}\nCongrats on your tenth anniversary on the Rōblox platform!`;
+		var s=`If your user ID is between these two values:\n\n`+
+			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
 		client.post('statuses/update',{status:s});
 	});
 }new CronJob('00 59 23 * * *',xxx,null,true,'America/Chicago');
