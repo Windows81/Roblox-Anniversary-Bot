@@ -27,7 +27,8 @@ const client=new Twitter({
 //Converts the Date object into an integer and vice-versa.
 function getDateInt(d){return 10000*d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
 function getDateStr(d){return~~(d/100%100)+'/'+d%100+'/'+~~(d/10000);}
-			    
+
+const twCache={};
 function getSalientUsers(d){
 	return new Promise(rs=>{
 		var url=`https://www.bing.com/search?q=site:https://www.`+
@@ -48,12 +49,14 @@ function getSalientUsers(d){
 }
 
 function getTwitter(id){
-	console.log(id);
 	var t={url:`https://www.roblox.com/users/${id}/profile`,
 		headers:{Cookie:'.ROBLOSECURITY='+process.env.roblosecurity}};
 	return new Promise(rs=>{
-		request.get(t,(e,r,b)=>{
+		if(twCache[id]!=null)rs(twCache[id]?twCache[id]:null);
+		else request.get(t,(e,r,b)=>{
 			var mt=/=https:\/\/twitter\.com\/([^ ]+)/.exec(b);
+			console.log(id,mt?mt[1]:null);
+			twCache[id]=mt?mt[1]:0;
 			rs(mt?mt[1]:null);
 		});
 	});
@@ -86,15 +89,14 @@ function joinD8(id){
 	});
 }
 
-const cache={};
-function clearCache(){cache.length=0}
+const jdCache={};
 async function getPlayerDateRange(base,dateInt){
 	var delta=0x1000,s=false;
 	var min=base,max=base;
 	for(var c=base;true;c+=delta){
 		
 		//Repeatedly searches for nearby IDs until a join date is found.
-		var jd;do cache[c]=jd=cache[c]?cache[c]:await joinD8(c);while(!jd&&c--);
+		var jd;do jdCache[c]=jd=jdCache[c]?jdCache[c]:await joinD8(c);while(!jd&&c--);
 		
 		//Stores the highest value found for the date.
 		if(jd==dateInt&&max<c)max=c;
@@ -111,7 +113,7 @@ async function getPlayerDateRange(base,dateInt){
 	delta=0x1000;for(var c=max;true;c+=delta){
 		
 		//Repeatedly searches for nearby IDs until a join date is found.
-		var jd;do cache[c]=jd=cache[c]?cache[c]:await joinD8(c);while(!jd&&c--);
+		var jd;do jdCache[c]=jd=jdCache[c]?jdCache[c]:await joinD8(c);while(!jd&&c--);
 		
 		if(delta<0^jd>dateInt)
 			if(c==base)delta*=-1;
