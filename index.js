@@ -48,6 +48,7 @@ function getSalientUsers(d){
 }
 
 function getTwitter(id){
+	console.log(id);
 	var t={url:`https://www.roblox.com/users/${id}/profile`,
 		headers:{Cookie:'.ROBLOSECURITY='+process.env.roblosecurity}};
 	return new Promise(rs=>{
@@ -130,7 +131,7 @@ async function xxx(){
 	d.setFullYear(d.getFullYear()-10);
 	const n=getDateInt(d);
 	var twA=getTwitters(n);
-	twA.forEach(s=>{console.log(s)});
+	//twA.forEach(s=>{console.log(s)});
 	
 	/*
 	getPlayerDateRange(base,n).then(r=>{
