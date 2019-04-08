@@ -27,17 +27,6 @@ const client=new Twitter({
 //Converts the Date object into an integer and vice-versa.
 function getDateInt(d){return 10000*d.getFullYear()+100*(1+d.getMonth())+d.getDate();}
 function getDateStr(d){return~~(d/100%100)+'/'+d%100+'/'+~~(d/10000);}
-
-function getTwitter(id){
-	var t={url:`https://www.roblox.com/users/${id}/profile`,
-		headers:{Cookie:'.ROBLOSECURITY='+process.env.roblosecurity}};
-	return new Promise(rs=>{
-		request.get(t,(e,r,b)=>{
-			var mt=/=https:\/\/twitter\.com\/([^ ]+)/.exec(b);
-			rs(mt?mt[1]:null);
-		});
-	});
-}
 			    
 function getSalientUsers(d){
 	return new Promise(rs=>{
@@ -56,6 +45,26 @@ function getSalientUsers(d){
 			if(arr.length==count)rs(arr);
 		});
 	});
+}
+
+function getTwitter(id){
+	var t={url:`https://www.roblox.com/users/${id}/profile`,
+		headers:{Cookie:'.ROBLOSECURITY='+process.env.roblosecurity}};
+	return new Promise(rs=>{
+		request.get(t,(e,r,b)=>{
+			var mt=/=https:\/\/twitter\.com\/([^ ]+)/.exec(b);
+			rs(mt?mt[1]:null);
+		});
+	});
+}
+
+async function getTwitters(d){
+	var a=await getSalientUsers(d),twA=[];
+	for(var c=0,id=a[0];c<a.length;id=a[++c]){
+		var tw=await getTwitter(id);
+		if(tw)twA.push(tw);
+	}
+	return twA;
 }
 
 function joinD8(id){
@@ -120,8 +129,8 @@ async function xxx(){
 	const d=new Date();
 	d.setFullYear(d.getFullYear()-10);
 	const n=getDateInt(d);
-	const t=await getSalientUsers(n);
-	t.forEach(e=>{console.log(e);});
+	var twA=getTwitters(n);
+	twA.forEach(s=>{console.log(s)});
 	
 	/*
 	getPlayerDateRange(base,n).then(r=>{
