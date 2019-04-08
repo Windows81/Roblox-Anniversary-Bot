@@ -47,7 +47,7 @@ function getSalientUsers(d){
 
 		//Iterates multiple pages worth of Bing search results.
 		for(var c=0;c<4;c++)request.get(url+(c*10+1),(e,r,b)=>{
-			var m=document.body.innerHTML.match(/users\/(\d+)\/profile/g);
+			var m=b.match(/users\/(\d+)\/profile/g);
 			count+=m.length;
 			
 			//Progressively adds the IDs into the array.
