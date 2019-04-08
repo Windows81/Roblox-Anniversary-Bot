@@ -31,23 +31,38 @@ function getDateStr(d){return~~(d/100%100)+'/'+d%100+'/'+~~(d/10000);}
 function getTwitter(id){
 	var t={url:`https://www.roblox.com/users/${id}/profile`,
 		headers:{Cookie:'.ROBLOSECURITY='+process.env.roblosecurity}};
-	return new Promise(fulfil=>{
+	return new Promise(rs=>{
 		request.get(t,(e,r,b)=>{
 			var mt=/=https:\/\/twitter\.com\/([^ ]+)/.exec(b);
-			fulfil(mt?mt[1]:null);
+			rs(mt?mt[1]:null);
 		});
 	});
 }
 			    
 function getSalientUsers(d){
-	d=getDateStr(d);
+	return new Promise(rs=>{
+		var url=`https://www.bing.com/search?q=site:https://www.`+
+			`roblox.com/users%20%22join%20date%20${getDateStr(d)}%22&first=`;
+		var count=0,arr=[];
+
+		//Iterates multiple pages worth of Bing search results.
+		for(var c=0;c<4;c++)request.get(url+(c*10+1),(e,r,b)=>{
+			var m=document.body.innerHTML.match(/users\/(\d+)\/profile/g);
+			count+=m.length;
+			
+			//Progressively adds the IDs into the array.
+			for(var mI=0,s=m[0];mI<m.length;s=m[++mI])
+				arr.push(parseInt(s.substring(6,s.length-6)));
+			if(arr.length==count)rs(arr);
+		});
+	});
 }
 
 function joinD8(id){
-	return new Promise(fulfil=>{
+	return new Promise(rs=>{
 		request.get(`https://www.roblox.com/users/${id}/profile`,(e,r,b)=>{
 			var mt=/(\d+)\/(\d+)\/(\d{4})/.exec(b);
-			if(!mt){fulfil(null);return;}
+			if(!mt){rs(null);return;}
 			var y=parseInt(mt[3]);
 			var m=parseInt(mt[1]);
 			var d=parseInt(mt[2]);
@@ -56,7 +71,7 @@ function joinD8(id){
 			if(m==2&&d==29)m=3,d=1;
 			
 			//Returns a YMD-integer-thing.
-			fulfil(10000*y+100*m+d);
+			rs(10000*y+100*m+d);
 		});
 	});
 }
@@ -80,7 +95,6 @@ async function getPlayerDateRange(base,dateInt){
 			else if(delta==-1){min=c+1;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-		console.log(jd,c,delta);
 	}
 	
 	//Now determine the max value in the range.
@@ -95,7 +109,6 @@ async function getPlayerDateRange(base,dateInt){
 			else if(delta==-1){max=c;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-		console.log(jd,c,delta);
 	}
 	
 	//Return the range.
@@ -103,12 +116,14 @@ async function getPlayerDateRange(base,dateInt){
 }
 
 var base=parseInt(process.env.baseUID);
-console.log(base);
-function xxx(){
+async function xxx(){
 	const d=new Date();
 	d.setFullYear(d.getFullYear()-10);
 	const n=getDateInt(d);
-	console.log(n);
+	const t=await getSalientUsers(n);
+	t.forEach(e=>{console.log(e);});
+	
+	/*
 	getPlayerDateRange(base,n).then(r=>{
 		console.log(d,r[0],r[1]);
 		base=process.env.baseUID=r[1];
@@ -116,7 +131,8 @@ function xxx(){
 			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
-}new CronJob('00 59 23 * * *',xxx);
+	*/
+}new CronJob('0 0 * * *',xxx);
 xxx();
 
-setInterval(()=>{},1<<30);
+setInterval(()=>{},1<<16);
