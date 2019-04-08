@@ -6,7 +6,6 @@ const PORT=process.env.PORT||5000;
 const CronJob=require('cron').CronJob;
 process.env.TZ='America/Chicago'
 
-/*
 var C='';
 const server=http.createServer((req,res)=>{
 	res.statusCode=200;
@@ -16,7 +15,6 @@ const server=http.createServer((req,res)=>{
 server.listen(PORT,()=>{
   console.log(`Server running on ${PORT}/`);
 });
-*/
 
 //Hack me if you can.
 const client=new Twitter({
@@ -116,7 +114,7 @@ function xxx(){
 		base=process.env.baseUID=r[1];
 		var s=`If your user ID is between these two values:\n\n`+
 			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
-		client.post('statuses/update',{status:s}).error((e)=>{console.warn(e)});
+		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
 }new CronJob('00 59 23 * * *',xxx);
 xxx();
