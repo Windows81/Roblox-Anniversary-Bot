@@ -61,9 +61,13 @@ function getTwitter(id){
 	});
 }
 
-async function getTwitters(d){
+async function getTwitters(d,range){
 	var a=await getSalientUsers(d),twA=[];
 	for(var c=0,id=a[0];c<a.length;id=a[++c]){
+		
+		//Skip if the ID doesn't seem to fit the date.
+		if(range&&(id<range[0]||id>range[1]))continue;
+		
 		var tw=await getTwitter(id);
 		console.log(id,tw);
 		if(tw)twA.push(tw);
@@ -133,8 +137,8 @@ async function xxx(){
 	d.setFullYear(d.getFullYear()-10);
 	const n=getDateInt(d);
 	
-	var twA=await getTwitters(n);
 	getPlayerDateRange(base,n).then(r=>{
+		var twA=await getTwitters(n,r);
 		console.log(d,r[0],r[1],twA.length);
 		base=process.env.baseUID=r[1];
 		var s=`If your user ID is between these two values:\n\n`+
