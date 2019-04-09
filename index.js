@@ -150,7 +150,7 @@ async function xxx(){
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
 }new CronJob('0 0 * * *',xxx).start();
-//xxx();
+xxx();
 
 //Pings the server itself every so often in order to keep it running.
 setInterval(()=>{request.get('https://tenth-anniversaries.herokuapp.com/')},1<<16);
