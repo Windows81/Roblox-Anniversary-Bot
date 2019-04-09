@@ -137,7 +137,7 @@ async function xxx(){
 	d.setFullYear(d.getFullYear()-10);
 	const n=getDateInt(d);
 	
-	getPlayerDateRange(base,n).then(r=>{
+	getPlayerDateRange(base,n).then(async r=>{
 		var twA=await getTwitters(n,r);
 		console.log(d,r[0],r[1],twA.length);
 		base=process.env.baseUID=r[1];
