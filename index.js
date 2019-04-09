@@ -65,6 +65,7 @@ async function getTwitters(d){
 	var a=await getSalientUsers(d),twA=[];
 	for(var c=0,id=a[0];c<a.length;id=a[++c]){
 		var tw=await getTwitter(id);
+		console.log(id,tw);
 		if(tw)twA.push(tw);
 	}
 	return twA;
@@ -139,13 +140,13 @@ async function xxx(){
 		var s=`If your user ID is between these two values:\n\n`+
 			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
 		if(twA.length>0){
-			var comb=s+'\n\nHonourable Mentions: '+twA.join(', ');
+			var comb=s+'\nHonourable Mentions: '+twA.join(', ');
 			s=comb;
 		}
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
 }new CronJob('0 0 * * *',xxx).start();
-xxx();
+//xxx();
 
 //Pings the server itself every so often in order to keep it running.
 setInterval(()=>{request.get('https://tenth-anniversaries.herokuapp.com/')},1<<16);
