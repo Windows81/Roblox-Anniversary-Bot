@@ -101,6 +101,7 @@ async function getPlayerDateRange(base,dateInt){
 		
 		//Repeatedly searches for nearby IDs until a join date is found.
 		var jd;do jdCache[c]=jd=jdCache[c]?jdCache[c]:await joinD8(c);while(!jd&&c--);
+		console.log(c,jd);
 		
 		//Stores the highest value found for the date.
 		if(jd==dateInt&&max<c)max=c;
@@ -111,13 +112,14 @@ async function getPlayerDateRange(base,dateInt){
 			else if(delta==-1){min=c+1;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-	}
+	}console.log('Range start completed.');
 	
 	//Now determine the max value in the range.
 	delta=0x1000;for(var c=max;true;c+=delta){
 		
 		//Repeatedly searches for nearby IDs until a join date is found.
 		var jd;do jdCache[c]=jd=jdCache[c]?jdCache[c]:await joinD8(c);while(!jd&&c--);
+		console.log(c,jd);
 		
 		if(delta<0^jd>dateInt)
 			if(c==base)delta*=-1;
@@ -125,7 +127,7 @@ async function getPlayerDateRange(base,dateInt){
 			else if(delta==-1){max=c;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-	}
+	}console.log('Range finish completed.');
 	
 	//Return the range.
 	return[min,max];
