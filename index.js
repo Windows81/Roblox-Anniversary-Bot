@@ -141,12 +141,11 @@ async function xxx(){
 		var twA=await getTwitters(n,r);
 		console.log(d,r[0],r[1],twA.length);
 		base=process.env.baseUID=r[1];
-		var s=`If your user ID is between these two values:\n\n`+
-			`${r[0]} ‒ ${r[1]}\n\nCongrats on your tenth anniversary on the Rōblox platform!`;
-		if(twA.length>0){
-			var comb=s+'\nHonourable Mentions: '+twA.join(', ');
-			s=comb;
-		}
+		var s=`If your user ID on Rōblox is between these two values:\n`+
+			`${r[0]} ‒ ${r[1]}\n\nCongratulations for having reached your tenth anniversary!`;
+		if(twA.length>0)
+			s+='\nHonourable Mentions: '+twA.join(', ');
+		s+='\n\nThis Tweet has been automatically generated, but you can still provide feedback.'
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
 }new CronJob('0 0 * * *',xxx).start();
