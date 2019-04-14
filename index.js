@@ -147,7 +147,7 @@ async function xxx(){
 			`${r[0]} ‒ ${r[1]}\n\nCongratulations for having reached your tenth anniversary!`;
 		if(twA.length>0)
 			s+='\nHonourable Mentions: '+twA.join(', ');
-		s+='\n\nThis Tweet has been automatically generated, but you can still provide feedback.'
+		s+='\n\nThis Tweet has been automatically generated, but you can still provide feedback.\n#HappyTennerdom'
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
 }new CronJob('0 0 * * *',xxx).start();
