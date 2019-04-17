@@ -112,7 +112,7 @@ async function getPlayerDateRange(base,dateInt){
 			else if(delta==-1){min=c+1;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-	}console.log('Range start completed.');
+	}console.log('Range start reached.');
 	
 	//Now determine the max value in the range.
 	delta=0x1000;for(var c=max;true;c+=delta){
@@ -127,7 +127,7 @@ async function getPlayerDateRange(base,dateInt){
 			else if(delta==-1){max=c;break;}
 			else{s=true;delta/=-2;}
 		else if(!s)delta*=2;
-	}console.log('Range finish completed.');
+	}console.log('Range finish reached.');
 	
 	//Return the range.
 	return[min,max];
@@ -143,11 +143,11 @@ async function xxx(){
 		var twA=await getTwitters(n,r);
 		console.log(d,r[0],r[1],twA.length);
 		base=process.env.baseUID=r[1];
-		var s=`If your user ID on Rōblox is between these two values:\n`+
-			`${r[0]} ‒ ${r[1]}\n\nCongratulations for having reached your tenth anniversary!`;
+		var s=`If your Rōblox user ID is between these two values:\n`+
+			`${r[0]} ‒ ${r[1]}\n\nCongratulations for having reached ten years on Rōblox!`;
 		if(twA.length>0)
 			s+='\nHonourable Mentions: '+twA.join(', ');
-		s+='\n\nThis Tweet has been automatically generated, but you can still provide feedback.\n#HappyTennerdom'
+		s+='\n\nThis Tweet was automatically generated, but you can still provide feedback.\n#HappyTennerdom'
 		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
 	});
 }new CronJob('0 0 * * *',xxx).start();
