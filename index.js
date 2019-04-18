@@ -147,14 +147,14 @@ async function xxx(){
 			`${r[0]} ‒ ${r[1]}\n\nCongratulations for having reached ten years on Rōblox!`;
 		var reply;
 		if(twA.length>0){
-			var comb=s+'\nHonourable Mentions: '+twA.join(', ');
-			if(comb.length<180)s=comb;else reply=comb;
+			var comb=s+(reply='\nHonourable Mentions: '+twA.join(', '));
+			if(comb.length<180)s=comb,reply=null;
 		}
 		s+='\n\nThis Tweet was automatically generated, but you can still provide feedback.\n#HappyTennerdom'
 		client.post('statuses/update',{status:C=s},(e,t,r)=>{
 			if(e)console.warn(e);
 			else if(reply)
-				client.post('statuses/update',{status:reply,in_reply_to_status_id:r.id})
+				client.post('statuses/update',{status:reply,in_reply_to_status_id:r.id_str})
 		});
 	});
 }new CronJob('0 0 * * *',xxx).start();
