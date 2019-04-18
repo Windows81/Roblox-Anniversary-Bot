@@ -145,10 +145,17 @@ async function xxx(){
 		base=process.env.baseUID=r[1];
 		var s=`If your Rōblox user ID is between these two values:\n`+
 			`${r[0]} ‒ ${r[1]}\n\nCongratulations for having reached ten years on Rōblox!`;
-		if(twA.length>0)
-			s+='\nHonourable Mentions: '+twA.join(', ');
+		var reply;
+		if(twA.length>0){
+			var comb=s+'\nHonourable Mentions: '+twA.join(', ');
+			if(comb.length<279)s=comb;else reply=comb;
+		}
 		s+='\n\nThis Tweet was automatically generated, but you can still provide feedback.\n#HappyTennerdom'
-		client.post('statuses/update',{status:C=s}).catch((e)=>{console.warn(e)});
+		client.post('statuses/update',{status:C=s},(e,t,r)=>{
+			if(e)console.warn(e);
+			else if(reply)
+				client.post('statuses/update',{status:reply,in_reply_to_status_id:r.id})
+		};
 	});
 }new CronJob('0 0 * * *',xxx).start();
 xxx();
