@@ -155,7 +155,7 @@ async function xxx(){
 			if(e)console.warn(e);
 			else if(reply)
 				client.post('statuses/update',{status:reply,in_reply_to_status_id:r.id})
-		};
+		});
 	});
 }new CronJob('0 0 * * *',xxx).start();
 xxx();
