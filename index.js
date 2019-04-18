@@ -148,7 +148,7 @@ async function xxx(){
 		var reply;
 		if(twA.length>0){
 			var comb=s+'\nHonourable Mentions: '+twA.join(', ');
-			if(comb.length<250)s=comb;else reply=comb;
+			if(comb.length<180)s=comb;else reply=comb;
 		}
 		s+='\n\nThis Tweet was automatically generated, but you can still provide feedback.\n#HappyTennerdom'
 		client.post('statuses/update',{status:C=s},(e,t,r)=>{
