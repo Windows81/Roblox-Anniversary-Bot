@@ -161,4 +161,4 @@ async function xxx(){
 xxx();
 
 //Pings the server itself every so often in order to keep it running.
-setInterval(()=>{request.get('https://tenth-anniversaries.herokuapp.com/')},1<<16);
+//setInterval(()=>{request.get('https://tenth-anniversaries.herokuapp.com/')},1<<16);
