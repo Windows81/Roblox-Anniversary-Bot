@@ -160,5 +160,9 @@ async function xxx(){
 }new CronJob('0 0 * * *',xxx).start();
 xxx();
 
-//Pings the server itself every so often in order to keep it running.
-//setInterval(()=>{request.get('https://tenth-anniversaries.herokuapp.com/')},1<<16);
+setInterval(()=>{
+	var url1='https://the-tenth-anniversaries.herokuapp.com/';
+	var url2='https://tenth-anniversaries.herokuapp.com/';
+	request.get(url1);//new Date().getHours()>=12?url1:url2);
+	update();
+},69000);
