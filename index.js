@@ -157,12 +157,12 @@ async function xxx(){
 				client.post('statuses/update',{status:reply,in_reply_to_status_id:r.id_str})
 		});
 	});
-}new CronJob('0 0 * * *',xxx).start();
+}
+new CronJob('0 0 * * *',xxx).start();
 xxx();
 
 setInterval(()=>{
 	var url1='https://the-tenth-anniversaries.herokuapp.com/';
 	var url2='https://tenth-anniversaries.herokuapp.com/';
 	request.get(url1);//new Date().getHours()>=12?url1:url2);
-	update();
 },69000);
