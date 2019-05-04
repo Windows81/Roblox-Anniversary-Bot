@@ -164,5 +164,5 @@ xxx();
 setInterval(()=>{
 	var url1='https://the-tenth-anniversaries.herokuapp.com/';
 	var url2='https://tenth-anniversaries.herokuapp.com/';
-	request.get(url1);//new Date().getHours()>=12?url1:url2);
+	request.get(request.get(new Date().getDate()>15?url1:url2);
 },69000);
