@@ -158,12 +158,11 @@ async function xxx(){
 		});
 	});
 }
-
 new CronJob('0 0 * * *',xxx).start();
 xxx();
 
 setInterval(()=>{
 	var url1='https://the-tenth-anniversaries.herokuapp.com/';
 	var url2='https://tenth-anniversaries.herokuapp.com/';
-	request.get(request.get(new Date().getDate()>15?url1:url2);
+	request.get(new Date().getDate()>15?url1:url2);
 },69000);
