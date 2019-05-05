@@ -158,6 +158,7 @@ async function xxx(){
 		});
 	});
 }
+
 new CronJob('0 0 * * *',xxx).start();
 xxx();
 
