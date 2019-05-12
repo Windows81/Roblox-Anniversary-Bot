@@ -154,7 +154,7 @@ async function xxx(){
 		client.post('statuses/update',{status:C=s},(e,t,r)=>{
 			if(e)console.warn(e);
 			else if(reply)
-				client.post('statuses/update',{status:reply,in_reply_to_status_id:r.id_str})
+				client.post('statuses/update',{status:reply,in_reply_to_status_id:t.id_str})
 		});
 	});
 }
