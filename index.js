@@ -159,7 +159,7 @@ async function xxx(){
 	});
 }
 new CronJob('0 0 * * *',xxx).start();
-//xxx();
+xxx();
 
 setInterval(()=>{
 	var url1='https://the-tenth-anniversaries.herokuapp.com/';
