@@ -18,10 +18,10 @@ server.listen(PORT,()=>{
 
 //Hack me if you can.
 const client=new Twitter({
-  consumer_key:'zY5y6SW3Bj5zcfUX2feiTJuxs',
-  consumer_secret:'0H4huTo7Is0DhsssO9LY2MeJPTVwNpFj1GKuaovzEEXrbtP5Mt',
-  access_token_key:'458038971-MIfqHPEw9nXq5hPlpoWWH52bXU5ksDGdQExKJV8y',
-  access_token_secret:'Teiibn2h9jENADHOQ176E0dpJVi1VnjpfmL41PACX9tYi'
+  consumer_key:'mp5WNHNfQODdZwfWDMRz5naLn',
+  consumer_secret:'MeChkBvcPuH8CebYHQWVr31OXUGbhhJ0dihKAmGO5RY1SQmegU',
+  access_token_key:'1161699869095915521-EL5D3mA86cQjutEkXnBh9IHQGLBsFP',
+  access_token_secret:'c0WoCHld6sR3Qlhc2p9WdHN31mNHMeO5FIJRPn0Gof8dJ'
 });
 
 //Converts the Date object into an integer and vice-versa.
