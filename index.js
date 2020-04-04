@@ -2,26 +2,27 @@ const fs = require('fs');
 const http = require('http');
 const request = require('request');
 const Twitter = require('twitter');
-const PORT = process.env.PORT || 5000;
+//const PORT = process.env.PORT || 5000;
 const CronJob = require('cron').CronJob;
 process.env.TZ = 'America/Chicago'
 
-var C = '';
+/*
 const server = http.createServer((req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'text/plain');
 	res.end(C);
 });
 server.listen(PORT, () => {
-	console.log(`Server running on ${PORT}/`);
+	console.log(`Server running on ${PORT}.`);
 });
+*/
 
 //Hack me if you can.
 const client = new Twitter({
-	consumer_key: 'zY5y6SW3Bj5zcfUX2feiTJuxs',
-	consumer_secret: '0H4huTo7Is0DhsssO9LY2MeJPTVwNpFj1GKuaovzEEXrbtP5Mt',
-	access_token_key: '458038971-MIfqHPEw9nXq5hPlpoWWH52bXU5ksDGdQExKJV8y',
-	access_token_secret: 'Teiibn2h9jENADHOQ176E0dpJVi1VnjpfmL41PACX9tYi'
+	consumer_key: 'mp5WNHNfQODdZwfWDMRz5naLn',
+	consumer_secret: 'MeChkBvcPuH8CebYHQWVr31OXUGbhhJ0dihKAmGO5RY1SQmegU',
+	access_token_key: '1161699869095915521-EL5D3mA86cQjutEkXnBh9IHQGLBsFP',
+	access_token_secret: 'c0WoCHld6sR3Qlhc2p9WdHN31mNHMeO5FIJRPn0Gof8dJ'
 });
 
 //Converts the Date object into an integer and vice-versa.
@@ -80,7 +81,7 @@ async function getTwitters(d, range) {
 function joinD8(id) {
 	return new Promise(rs => {
 		request.get(`https://www.roblox.com/users/${id}/profile`, (e, r, b) => {
-			var mt = /data-date-time-i18n-value=(\d+)\/(\d+)\/(\d{4})/.exec(b);
+			var mt = /text-lead>(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(b);
 			if (!mt) { rs(null); return; }
 			var y = parseInt(mt[3]);
 			var m = parseInt(mt[1]);
@@ -153,7 +154,7 @@ async function xxx() {
 			if (comb.length < 180) s = comb, reply = null;
 		}
 		s += '\n\nThis Tweet was automatically generated, but you can still provide feedback.\n#HappyTennerdom'
-		client.post('statuses/update', { status: C = s }, (e, t, r) => {
+		client.post('statuses/update', { status: s }, (e, t, r) => {
 			if (e) console.warn(e);
 			else if (reply)
 				client.post('statuses/update', { status: reply, in_reply_to_status_id: t.id_str })
@@ -163,8 +164,10 @@ async function xxx() {
 new CronJob('0 0 * * *', xxx).start();
 xxx();
 
+/*
 setInterval(() => {
 	var url1 = 'https://the-tenth-anniversaries.herokuapp.com/';
 	var url2 = 'https://tenth-anniversaries.herokuapp.com/';
 	request.get(new Date().getDate() > 15 ? url1 : url2);
 }, 69000);
+*/
